@@ -114,6 +114,11 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
         info = this.getPackageDetail(packageInfo.packageName);
       }else{
         info.put("packageName", packageInfo.packageName);
+        info.put("appName", packageInfo.applicationInfo.loadLabel(this.activity.getPackageManager()).toString());
+        info.put("versionName", packageInfo.versionName);
+        info.put("versionCode", packageInfo.versionCode);
+        info.put("firstInstallTime", packageInfo.firstInstallTime);
+        info.put("lastUpdateTime", packageInfo.lastUpdateTime);
       }
 
       list.add(info);

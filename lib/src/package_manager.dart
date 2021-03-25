@@ -15,9 +15,9 @@ class PackageManager {
   MethodChannel _channel = MethodChannel("package_manager");
 
   /// @Desc  : 获取已安装应用列表
-  /// detail 参数：true=获取详情、false=只获取包名，为false会大幅度提升速度
+  /// detail 参数：true=获取详情、false=只获取包名等不耗时信息，为false会大幅度提升速度
   /// @author: 枫儿
-  Future<List> getInstalledList({bool isDetail = true}) async{
+  Future<List> getInstalledList({bool isDetail = false}) async{
     List list = await _channel.invokeMethod("getInstalledList", {"isDetail": isDetail});
     return list;
   }

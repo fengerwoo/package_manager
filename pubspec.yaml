@@ -1,6 +1,6 @@
 name: package_manager
 description: Get the list of installed installation packages, get the name, version, icon, first installation time, and last update time corresponding to the installed package name, install other applications, and uninstall other applications
-version: 1.1.0
+version: 1.2.0
 author: fenger
 homepage: https://github.com/fengerwoo
 repository: https://github.com/fengerwoo/package_manager
