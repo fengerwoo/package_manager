@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:logger/logger.dart';
 import 'package:logger_flutter/logger_flutter.dart';
 import 'package:package_manager/package_manager.dart';
+import 'package:package_manager_example/util.dart';
 
 void main() {
   runApp(MyApp());
@@ -41,7 +42,7 @@ class _MyAppState extends State<MyApp> {
                   Card(
                     child: Column(
                       children: [
-                        ListTile(title: Text("穿山甲"), subtitle: Text("穿山甲的广告接口演示，请先点击初始化接口"),),
+                        ListTile(title: Text("包管理器"), subtitle: Text("包相关操作"),),
                         Container(
                           // width: double.infinity,
                           child: Wrap(
@@ -82,7 +83,8 @@ class _MyAppState extends State<MyApp> {
 
                               ElevatedButton.icon(
                                   onPressed: () async {
-                                    bool ret =  await PackageManager.getInstance().install("");
+                                    String filePath =  await Util.downloadFile("https://ossdafuhao.oss-cn-shanghai.aliyuncs.com/ZM%2Fandroid_debug.apk");
+                                    bool ret =  await PackageManager.getInstance().install(filePath);
                                     logger.i("安装应用: 结果：${ret}");
                                   },
                                   icon: Icon(Icons.home_filled),
@@ -91,15 +93,11 @@ class _MyAppState extends State<MyApp> {
 
                               ElevatedButton.icon(
                                   onPressed: () async {
-                                    bool ret =  await PackageManager.getInstance().install("com.tencent.mm");
+                                    bool ret =  await PackageManager.getInstance().unInstall("uni.UNI1E28B6B");
                                     logger.i("卸载应用: 结果：${ret}");
                                   },
                                   icon: Icon(Icons.home_filled),
                                   label: Text("卸载应用")),
-
-
-
-
 
                             ],
                           ),

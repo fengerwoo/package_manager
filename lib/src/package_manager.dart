@@ -29,6 +29,8 @@ class PackageManager {
   }
 
   /// @Desc  : 安装应用
+  /// path路径建议放在：/data/data/com.xxx.your_package/file/download目录下
+  /// 相当于：getApplicationSupportDirectory().path + "/downloads/"
   /// @author: 枫儿
   Future<bool> install(String path) async{
     await _channel.invokeMethod("install", {"path": path});

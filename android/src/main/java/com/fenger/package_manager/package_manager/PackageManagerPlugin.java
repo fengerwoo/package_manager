@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.util.Base64;
 
 import androidx.annotation.NonNull;
@@ -65,10 +66,19 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
         result.success(false);
         return;
       }
-      Intent intent = new Intent();
-      intent.setAction(Intent.ACTION_VIEW);
-      intent.setDataAndType(Uri.fromFile(file),
-              "application/vnd.android.package-archive");
+
+      Intent intent = new Intent(Intent.ACTION_VIEW);
+      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      if(Build.VERSION.SDK_INT>=24) { //Android 7.0及以上
+        // 参数2 清单文件中provider节点里面的authorities ; 参数3  共享的文件,即apk包的file类
+
+        Uri apkUri = FileProvider.getUriForFile(this.activity, this.activity.getPackageName()+".fenger.package_manager.fileprovider", file);
+        //对目标应用临时授权该Uri所代表的文件
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
+      }else{
+        intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+      }
       this.activity.startActivity(intent);
       result.success(true);
 
@@ -76,9 +86,8 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
 
     } else if(call.method.equals("unInstall")){
       String packageName = call.argument("packageName");
-      Uri packageURI = Uri.parse("package:".concat(packageName));
-      Intent intent = new Intent(Intent.ACTION_DELETE);
-      intent.setData(packageURI);
+      Uri uri = Uri.fromParts("package", packageName, null);
+      Intent intent = new Intent(Intent.ACTION_DELETE, uri);
       this.activity.startActivity(intent);
 
 

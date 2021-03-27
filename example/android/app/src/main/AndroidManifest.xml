@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fenger.package_manager.package_manager_example">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
    <application
         android:label="package_manager_example"
         android:icon="@mipmap/ic_launcher">

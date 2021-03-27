@@ -2,7 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98ce568f-af58-4c92-89ea-f965a2f3625e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/android/src/main/java/com/fenger/package_manager/package_manager/FileProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/res/xml/package_manager_filepaths.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/lib/util.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/fenger/package_manager/package_manager/PackageManagerPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/fenger/package_manager/package_manager/PackageManagerPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/package_manager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/package_manager.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -10,6 +24,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[9a458259]" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -44,26 +65,35 @@
       <screen x="44" y="23" width="2516" height="1417" />
     </state>
     <state x="706" y="471" key="#com.intellij.execution.impl.EditConfigurationsDialog/2560.700.1440.877/44.23.2516.1417@44.23.2516.1417" timestamp="1616657948853" />
-    <state width="456" height="466" key="DebuggerActiveHint" timestamp="1616660161343">
+    <state x="915" y="444" key="AndroidCreateResourceDirectoryDialog" timestamp="1616823943740">
+      <screen x="44" y="23" width="2516" height="1417" />
+    </state>
+    <state x="915" y="444" key="AndroidCreateResourceDirectoryDialog/2560.782.1440.877/44.23.2516.1417@44.23.2516.1417" timestamp="1616823943740" />
+    <state width="456" height="466" key="DebuggerActiveHint" timestamp="1616824132948">
       <screen x="44" y="23" width="2516" height="1417" />
     </state>
     <state width="456" height="466" key="DebuggerActiveHint/2560.700.1440.877/44.23.2516.1417@44.23.2516.1417" timestamp="1616660161343" />
-    <state width="1671" height="373" key="GridCell.Tab.0.bottom" timestamp="1616660645344">
+    <state width="456" height="466" key="DebuggerActiveHint/2560.782.1440.877/44.23.2516.1417@44.23.2516.1417" timestamp="1616824132948" />
+    <state width="1671" height="357" key="GridCell.Tab.0.bottom" timestamp="1616830305798">
       <screen x="44" y="23" width="2516" height="1417" />
     </state>
     <state width="1671" height="373" key="GridCell.Tab.0.bottom/2560.700.1440.877/44.23.2516.1417@44.23.2516.1417" timestamp="1616660645344" />
-    <state width="1671" height="373" key="GridCell.Tab.0.center" timestamp="1616660645344">
+    <state width="1671" height="357" key="GridCell.Tab.0.bottom/2560.782.1440.877/44.23.2516.1417@44.23.2516.1417" timestamp="1616830305798" />
+    <state width="1671" height="357" key="GridCell.Tab.0.center" timestamp="1616830305797">
       <screen x="44" y="23" width="2516" height="1417" />
     </state>
     <state width="1671" height="373" key="GridCell.Tab.0.center/2560.700.1440.877/44.23.2516.1417@44.23.2516.1417" timestamp="1616660645344" />
-    <state width="1671" height="373" key="GridCell.Tab.0.left" timestamp="1616660645343">
+    <state width="1671" height="357" key="GridCell.Tab.0.center/2560.782.1440.877/44.23.2516.1417@44.23.2516.1417" timestamp="1616830305797" />
+    <state width="1671" height="357" key="GridCell.Tab.0.left" timestamp="1616830305797">
       <screen x="44" y="23" width="2516" height="1417" />
     </state>
     <state width="1671" height="373" key="GridCell.Tab.0.left/2560.700.1440.877/44.23.2516.1417@44.23.2516.1417" timestamp="1616660645343" />
-    <state width="1671" height="373" key="GridCell.Tab.0.right" timestamp="1616660645344">
+    <state width="1671" height="357" key="GridCell.Tab.0.left/2560.782.1440.877/44.23.2516.1417@44.23.2516.1417" timestamp="1616830305797" />
+    <state width="1671" height="357" key="GridCell.Tab.0.right" timestamp="1616830305797">
       <screen x="44" y="23" width="2516" height="1417" />
     </state>
     <state width="1671" height="373" key="GridCell.Tab.0.right/2560.700.1440.877/44.23.2516.1417@44.23.2516.1417" timestamp="1616660645344" />
+    <state width="1671" height="357" key="GridCell.Tab.0.right/2560.782.1440.877/44.23.2516.1417@44.23.2516.1417" timestamp="1616830305797" />
     <state width="757" height="583" key="XDebugger.FullValuePopup" timestamp="1616657907875">
       <screen x="44" y="23" width="2516" height="1417" />
     </state>
