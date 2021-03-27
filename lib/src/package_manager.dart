@@ -28,18 +28,31 @@ class PackageManager {
     return await _channel.invokeMapMethod("getPackageDetail", {"packageName": packageName});
   }
 
+  /// @Desc  : 根据包名判断是否安装了该App
+  /// @author: 枫儿
+  Future<bool> isInstall(String packageName) async{
+    return await _channel.invokeMethod("isInstall", {"packageName": packageName});
+  }
+
+  /// @Desc  : 根据包名打开App
+  /// @author: 枫儿
+  Future<bool> openApp(String packageName) async{
+    return await _channel.invokeMethod("openApp", {"packageName": packageName});
+  }
+
+
   /// @Desc  : 安装应用
   /// path路径建议放在：/data/data/com.xxx.your_package/file/download目录下
   /// 相当于：getApplicationSupportDirectory().path + "/downloads/"
   /// @author: 枫儿
   Future<bool> install(String path) async{
-    await _channel.invokeMethod("install", {"path": path});
+    return await _channel.invokeMethod("install", {"path": path});
   }
 
   /// @Desc  : 卸载应用
   /// @author: 枫儿
   Future<bool> unInstall(String packageName) async{
-    await _channel.invokeMethod("unInstall", {"packageName": packageName});
+    return await _channel.invokeMethod("unInstall", {"packageName": packageName});
   }
 
 }

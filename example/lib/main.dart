@@ -83,6 +83,22 @@ class _MyAppState extends State<MyApp> {
 
                               ElevatedButton.icon(
                                   onPressed: () async {
+                                    bool ret =  await PackageManager.getInstance().isInstall("uni.UNI1E28B6B");
+                                    logger.i("判断应用是否存在: 结果：${ret}");
+                                  },
+                                  icon: Icon(Icons.home_filled),
+                                  label: Text("判断应用是否存在")),
+
+                              ElevatedButton.icon(
+                                  onPressed: () async {
+                                    bool ret =  await PackageManager.getInstance().openApp("uni.UNI1E28B6B");
+                                    logger.i("打开应用: 结果：${ret}");
+                                  },
+                                  icon: Icon(Icons.home_filled),
+                                  label: Text("打开应用")),
+
+                              ElevatedButton.icon(
+                                  onPressed: () async {
                                     String filePath =  await Util.downloadFile("https://ossdafuhao.oss-cn-shanghai.aliyuncs.com/ZM%2Fandroid_debug.apk");
                                     bool ret =  await PackageManager.getInstance().install(filePath);
                                     logger.i("安装应用: 结果：${ret}");

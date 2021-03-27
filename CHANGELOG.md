@@ -1,3 +1,6 @@
+## 1.5.0
+* Add to determine whether the application exists and open the application
+
 ## 1.4.0
 * Perfect installation and uninstallation of apk
 

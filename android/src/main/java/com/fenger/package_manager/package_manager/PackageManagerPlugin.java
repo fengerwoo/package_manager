@@ -59,6 +59,25 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
 
 
 
+    } else if(call.method.equals("isInstall")){
+      String packageName = call.argument("packageName");
+      result.success(isInstall(packageName));
+
+
+
+    } else if(call.method.equals("openApp")){
+      String packageName = call.argument("packageName");
+      PackageManager packageManager = this.activity.getPackageManager();
+      Intent intent = packageManager.getLaunchIntentForPackage(packageName);
+      if(intent==null){ //未安装
+        result.success(false);
+      }else { // 去打开
+        this.activity.startActivity(intent);
+        result.success(true);
+      }
+
+
+
     } else if(call.method.equals("install")){
       String path = call.argument("path");
       File file = new File(path);
@@ -189,6 +208,28 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
     }
     return info;
   }
+
+
+  /**
+   * 获取包是否已安装
+   * @return
+   */
+  public boolean isInstall(String packageName){
+
+    // 获取 PackageManager
+    final PackageManager packageManager = this.activity.getPackageManager();
+
+    //获取所有已安装程序的包信息
+    List<PackageInfo> packages = packageManager.getInstalledPackages(0);
+    for(int i=0; i<packages.size(); i++) {
+      PackageInfo packageInfo = packages.get(i);
+      if(packageInfo.packageName.equals(packageName)){
+        return true;
+      }
+    }
+    return false;
+  }
+
 
 
   @Override
