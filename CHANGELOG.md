@@ -1,5 +1,5 @@
 ## 1.7.0
-* Add application life cycle monitoring
+* The results of install and uninstall can be monitored
 
 ## 1.6.0
 * Add application life cycle monitoring
