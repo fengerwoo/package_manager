@@ -1,3 +1,9 @@
+## 1.7.0
+* Add application life cycle monitoring
+
+## 1.6.0
+* Add application life cycle monitoring
+
 ## 1.5.0
 * Add to determine whether the application exists and open the application
 

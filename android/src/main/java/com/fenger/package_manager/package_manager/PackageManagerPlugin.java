@@ -1,6 +1,7 @@
 package com.fenger.package_manager.package_manager;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -108,8 +109,8 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
       Uri uri = Uri.fromParts("package", packageName, null);
       Intent intent = new Intent(Intent.ACTION_DELETE, uri);
       this.activity.startActivity(intent);
-
-
+      result.success(true);
+      
     } else {
       result.notImplemented();
     }
@@ -231,10 +232,44 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
   }
 
 
+  AppFrontBackHelper appFrontBackHelper;
+  Application appFrontBackHelperApplication;
+  public void registerAppFront(Activity activity){
+    if(appFrontBackHelper!=null){
+      return;
+    }
+
+    appFrontBackHelper = new AppFrontBackHelper();
+    appFrontBackHelperApplication = activity.getApplication();
+    appFrontBackHelper.register(appFrontBackHelperApplication, new AppFrontBackHelper.OnAppStatusListener() {
+      @Override
+      public void onFront() {
+        PackageManagerPlugin.this.channel.invokeMethod("dartApplife", new HashMap<String, Object>(){{
+          put("life", "onFront");
+        }});
+      }
+
+      @Override
+      public void onBack() {
+        PackageManagerPlugin.this.channel.invokeMethod("dartApplife", new HashMap<String, Object>(){{
+          put("life", "onBack");
+        }});
+      }
+    });
+  }
+
+  public void unRegisterAppFront(){
+    if(appFrontBackHelper != null && appFrontBackHelperApplication != null){
+      appFrontBackHelper.unRegister(appFrontBackHelperApplication);
+      appFrontBackHelper = null;
+      appFrontBackHelperApplication = null;
+    }
+  }
 
   @Override
   public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
     activity = binding.getActivity();
+    this.registerAppFront(activity);
   }
 
   @Override
@@ -249,6 +284,6 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
 
   @Override
   public void onDetachedFromActivity() {
-
+    this.unRegisterAppFront();
   }
 }

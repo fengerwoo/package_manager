@@ -25,6 +25,12 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     LogConsole.init();
+
+    /// 监听App前后台切换（解决activity切换也算App前后台切换问题）
+    PackageManager.getInstance().appLifeHandler.listen((event) {
+      logger.i("监听App前后台切换: $event");
+    });
+
   }
 
   @override
@@ -100,7 +106,7 @@ class _MyAppState extends State<MyApp> {
                               ElevatedButton.icon(
                                   onPressed: () async {
                                     String filePath =  await Util.downloadFile("https://ossdafuhao.oss-cn-shanghai.aliyuncs.com/ZM%2Fandroid_debug.apk");
-                                    bool ret =  await PackageManager.getInstance().install(filePath);
+                                    bool ret =  await PackageManager.getInstance().install(filePath, packageName: "uni.UNI1E28B6B");
                                     logger.i("安装应用: 结果：${ret}");
                                   },
                                   icon: Icon(Icons.home_filled),
