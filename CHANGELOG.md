@@ -1,3 +1,6 @@
+## 1.8.0
+* add android.permission.REQUEST_DELETE_PACKAGES
+
 ## 1.7.0
 * The results of install and uninstall can be monitored
 

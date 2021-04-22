@@ -1,7 +1,9 @@
 package com.fenger.package_manager.package_manager;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -234,6 +236,11 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
 
   AppFrontBackHelper appFrontBackHelper;
   Application appFrontBackHelperApplication;
+
+  /**
+   * 注册前后台切换检测
+   * @param activity
+   */
   public void registerAppFront(Activity activity){
     if(appFrontBackHelper!=null){
       return;
@@ -258,6 +265,9 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
     });
   }
 
+  /**
+   * 取消注册前后台切换
+   */
   public void unRegisterAppFront(){
     if(appFrontBackHelper != null && appFrontBackHelperApplication != null){
       appFrontBackHelper.unRegister(appFrontBackHelperApplication);
