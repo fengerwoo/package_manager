@@ -15,7 +15,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.util.Base64;
 import android.graphics.Canvas;
-
 import androidx.annotation.NonNull;
 
 import java.io.ByteArrayOutputStream;
@@ -58,25 +57,17 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
       Boolean isDetail = call.argument("isDetail");
       result.success(getInstalledList(isDetail));
 
-
-
     } else if(call.method.equals("getPackageDetail")){
       String packageName = call.argument("packageName");
       result.success(getPackageDetail(packageName));
-
-
 
     } else if(call.method.equals("getPackageArchiveInfo")){
       String archivePath = call.argument("path");
       result.success(getPackageArchiveInfo(archivePath));
 
-
-
     } else if(call.method.equals("isInstall")){
       String packageName = call.argument("packageName");
       result.success(isInstall(packageName));
-
-
 
     } else if(call.method.equals("openApp")){
       String packageName = call.argument("packageName");
@@ -88,8 +79,6 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
         this.activity.startActivity(intent);
         result.success(true);
       }
-
-
 
     } else if(call.method.equals("install")){
       String path = call.argument("path");
@@ -113,8 +102,6 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
       }
       this.activity.startActivity(intent);
       result.success(true);
-
-
 
     } else if(call.method.equals("unInstall")){
       String packageName = call.argument("packageName");
@@ -216,7 +203,6 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
     }
     return info;
   }
-
 
    public Map getPackageArchiveInfo(String path){
     Map info = new HashMap();
