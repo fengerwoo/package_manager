@@ -48,6 +48,10 @@ class PackageManager {
   Future<Map?> getPackageDetail(String packageName) async {
     return await _channel.invokeMapMethod("getPackageDetail", {"packageName": packageName});
   }
+  
+  Future<Map?> getPackageArchiveInfo(String path) async {
+    return await _channel.invokeMapMethod("getPackageArchiveInfo", {"path": path});
+  }
 
   /// @Desc  : 根据包名判断是否安装了该App
   /// @author: 枫儿
