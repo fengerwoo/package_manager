@@ -242,15 +242,10 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
         // info.put("appIcon", "no icon :(");
     }
 
-    String publicSourceDir = packageInfo.applicationInfo.publicSourceDir;
-    int size = Integer.valueOf((int)new File(publicSourceDir).length());
-    info.put("appSize", size);
+    //String publicSourceDir = packageInfo.applicationInfo.publicSourceDir;
+    //int size = Integer.valueOf((int)new File(publicSourceDir).length());
+    //info.put("appSize", size);
 
-    if((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM)==0) {
-      info.put("isSystemApp", false);
-    }else{
-      info.put("isSystemApp", true);
-    }
     return info;
   }
 
