@@ -14,7 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Base64;
-
+import android.graphics.Canvas;
 import androidx.annotation.NonNull;
 
 import java.io.ByteArrayOutputStream;
@@ -32,6 +32,9 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
+
+import static com.fenger.package_manager.package_manager.utils.Base64Utils.encodeToBase64;
+import static com.fenger.package_manager.package_manager.utils.DrawableUtils.getBitmapFromDrawable;
 
 /** PackageManagerPlugin */
 public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
@@ -54,19 +57,17 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
       Boolean isDetail = call.argument("isDetail");
       result.success(getInstalledList(isDetail));
 
-
-
     } else if(call.method.equals("getPackageDetail")){
       String packageName = call.argument("packageName");
       result.success(getPackageDetail(packageName));
 
-
+    } else if(call.method.equals("getPackageArchiveInfo")){
+      String archivePath = call.argument("path");
+      result.success(getPackageArchiveInfo(archivePath));
 
     } else if(call.method.equals("isInstall")){
       String packageName = call.argument("packageName");
       result.success(isInstall(packageName));
-
-
 
     } else if(call.method.equals("openApp")){
       String packageName = call.argument("packageName");
@@ -78,8 +79,6 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
         this.activity.startActivity(intent);
         result.success(true);
       }
-
-
 
     } else if(call.method.equals("install")){
       String path = call.argument("path");
@@ -103,8 +102,6 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
       }
       this.activity.startActivity(intent);
       result.success(true);
-
-
 
     } else if(call.method.equals("unInstall")){
       String packageName = call.argument("packageName");
@@ -184,21 +181,16 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
     info.put("lastUpdateTime", packageInfo.lastUpdateTime);
 
     String appIconBase64 = null;
-    try{
+    try {
       Drawable appIcon = packageInfo.applicationInfo.loadIcon(this.activity.getPackageManager());
-      BitmapDrawable btDrawable = (BitmapDrawable) appIcon;
-      Bitmap bitmap = btDrawable.getBitmap();
+      String encodedImage = encodeToBase64(getBitmapFromDrawable(appIcon), Bitmap.CompressFormat.PNG, 100);
+      info.put("appIcon", encodedImage);
+    } catch (Exception e){
+        e.printStackTrace();
+        // info.put("appIcon", "no icon :(");
+    }
 
-      //先将bitmap转为byte[]
-      ByteArrayOutputStream baos = new ByteArrayOutputStream();
-      bitmap.compress(Bitmap.CompressFormat.PNG,100,baos);
-      byte[] bytes = baos.toByteArray();
-      //将byte[]转为base64
-      appIconBase64 = Base64.encodeToString(bytes,Base64.DEFAULT);
-    }catch (Exception e){e.printStackTrace();}
-
-
-    info.put("appIcon", "data:image/png;base64,"+appIconBase64);
+    // info.put("appIcon", "data:image/png;base64,"+appIconBase64);
 
     String publicSourceDir = packageInfo.applicationInfo.publicSourceDir;
     int size = Integer.valueOf((int)new File(publicSourceDir).length());
@@ -209,6 +201,51 @@ public class PackageManagerPlugin implements FlutterPlugin, MethodCallHandler, A
     }else{
       info.put("isSystemApp", true);
     }
+    return info;
+  }
+
+   public Map getPackageArchiveInfo(String path){
+    Map info = new HashMap();
+
+    // 获取 PackageManager
+    final PackageManager packageManager = this.activity.getPackageManager();
+    PackageInfo packageInfo = null;
+    try {
+      packageInfo = packageManager.getPackageArchiveInfo(path, 0);
+      packageInfo.applicationInfo.publicSourceDir = path;
+      packageInfo.applicationInfo.sourceDir = path;
+    // } catch (PackageManager.NameNotFoundException e) {
+    } catch (Exception e) {
+      e.printStackTrace();
+      //return null;
+    }
+
+    if (packageInfo == null) {
+      return null;
+    }
+
+    info.put("packageName", packageInfo.packageName);
+    info.put("appName", packageInfo.applicationInfo.loadLabel(this.activity.getPackageManager()).toString());
+    info.put("versionName", packageInfo.versionName);
+    info.put("versionCode", packageInfo.versionCode);
+
+    info.put("firstInstallTime", packageInfo.firstInstallTime);
+    info.put("lastUpdateTime", packageInfo.lastUpdateTime);
+
+    String appIconBase64 = null;
+    try {
+      Drawable appIcon = packageInfo.applicationInfo.loadIcon(this.activity.getPackageManager());
+      String encodedImage = encodeToBase64(getBitmapFromDrawable(appIcon), Bitmap.CompressFormat.PNG, 100);
+      info.put("appIcon", encodedImage);
+    } catch (Exception e){
+        e.printStackTrace();
+        // info.put("appIcon", "no icon :(");
+    }
+
+    //String publicSourceDir = packageInfo.applicationInfo.publicSourceDir;
+    //int size = Integer.valueOf((int)new File(publicSourceDir).length());
+    //info.put("appSize", size);
+
     return info;
   }
 
